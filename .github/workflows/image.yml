@@ -29,7 +29,6 @@ jobs:
           export IMAGE_ID=ghcr.io/${{ github.repository_owner }}/$IMAGE_NAME:${{ inputs.image-tag }}
           export IMAGE_ID=$(echo $IMAGE_ID | tr '[A-Z]' '[a-z]')
           echo IMAGE_ID=$IMAGE_ID
-          cd .github/docker
           docker build --tag $IMAGE_ID .
 
       - name: Login to GitHub Container Registry
