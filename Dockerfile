@@ -16,7 +16,7 @@
 
 FROM alpine:3.17
 
-RUN apk add --update wget git openjdk16 clang libxcb-dev libx11-dev libxrandr-dev libxinerama-dev libxcursor-dev libxi-dev unzip
+RUN apk add --update bash wget git openjdk16 clang libxcb-dev libx11-dev libxrandr-dev libxinerama-dev libxcursor-dev libxi-dev unzip
 
 # Configure Android env variables
 ENV ANDROID_SDK=/usr/local/android-sdk \
