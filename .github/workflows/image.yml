@@ -11,7 +11,7 @@ on:
         type: string
 
 env:
-  IMAGE_NAME: android-ndk-build
+  IMAGE_ID: $(echo "ghcr.io/${{ github.repository_owner }}/android-ndk-build:${{ inputs.image-tag }}" | tr '[A-Z]' '[a-z]')
 
 jobs:
   build:
@@ -25,18 +25,10 @@ jobs:
         uses: actions/checkout@v3
 
       - name: Build Image
-        run: |
-          export IMAGE_ID=ghcr.io/${{ github.repository_owner }}/$IMAGE_NAME:${{ inputs.image-tag }}
-          export IMAGE_ID=$(echo $IMAGE_ID | tr '[A-Z]' '[a-z]')
-          echo IMAGE_ID=$IMAGE_ID
-          docker build --tag $IMAGE_ID .
+        run: docker build --tag $IMAGE_ID .
 
       - name: Login to GitHub Container Registry
         run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
 
       - name: Push Image
-        run: |
-          export IMAGE_ID=ghcr.io/${{ github.repository_owner }}/$IMAGE_NAME:${{ inputs.image-tag }}
-          export IMAGE_ID=$(echo $IMAGE_ID | tr '[A-Z]' '[a-z]')
-          echo IMAGE_ID=$IMAGE_ID
-          docker push $IMAGE_ID
+        run: docker push $IMAGE_ID
