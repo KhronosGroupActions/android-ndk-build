@@ -11,7 +11,7 @@ on:
         type: string
 
 env:
-  IMAGE_ID: ghcr.io/${{ github.repository_owner }}/android-ndk-build:${{ inputs.image-tag }}
+  IMAGE_ID: ghcr.io/khronosgroupactions/android-ndk-build:${{ inputs.image-tag }}
 
 jobs:
   build:
